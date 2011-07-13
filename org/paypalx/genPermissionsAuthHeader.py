@@ -30,14 +30,6 @@ def getEncodedString(sIn):
 
 	return sOut
 
-# does not seem to work for some reason - throw away soon
-def getEncodedStringOld(sIn):
-	if (len(sIn)==0):
-		raise Exception('sIn', 'isNull')
-
-	sOut=urllib.quote_plus(sIn)
-	return sOut
-
 def getAppendedStr(sIn, sParam):
 	if ( (len(sIn)==0) | (len(sParam)==0) ):
 		raise Exception ('sIn', 'isNull')
@@ -65,7 +57,6 @@ def getAuthHeader(apiUser, apiPass, accessTok, secTok, httpMethod, scriptURI):
 	sigBase=getAppendedStr(sigBase, getEncodedString(sigParm))
 	
 	sigFinal=getSignature(key, sigBase)
-	#sigFnlEnc=urllib.quote_plus(sigFinal)
 
 	return (str(timeStamp),sigFinal)
 
@@ -78,7 +69,7 @@ def getAuthHeader(apiUser, apiPass, accessTok, secTok, httpMethod, scriptURI):
 #	httpMethod="POST"
 #	scriptURI="https://api-3t.sandbox.paypal.com/nvp";
 
-#	(timeStamp,sig,sigenc) = \
+#	(timeStamp,sig) = \
 #		getAuthHeader(apiUser, apiPass, \
 #			accessTok, secTok, httpMethod, scriptURI)
 #	print(timeStamp, " ", sig)
